@@ -3,16 +3,23 @@
 
 int main() {
 	
+	Employee* employee[100];
+	int count = 0; // 몇명의 사원이 있는지 기억
+
 	while (true) {
-		printf("1.");
+		printf("명령어를 입력하세요\n");
+		printf("1. 사원 보기\n");
+		printf("2. 사원 추가\n");
+		printf("3. 사원 삭제\n");
+		printf("4. 프로그램 종료\n");
 
 		fseek(stdin, 0, SEEK_END);
 		int input;
 		scanf("%d", &input);
 
 		if (input == 1) {
-			for (int i = 0; ) {
-
+			for (int i = 0; i < count; i++) {
+				employee[i]->printInfo();
 			}
 		}
 		else if (input == 2) {

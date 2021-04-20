@@ -7,9 +7,10 @@ public:
 	int legs;
 	char name[50];
 
-	Animal() {
-		legs = 4;
-		strcpy(name, "동물");
+	Animal(int legs, const char* name) {
+		printf("동물 생성자 실행\n");
+		this -> legs = legs;
+		strcpy(this->name, name);
 	}
 
 	void printAnimalInfo() {
@@ -19,13 +20,18 @@ public:
 };
 class Person : public Animal{
 public:
-	char regist_no[30];
 
+	Person(const char* regist_no) : Animal(2,"사람") {
+		printf("사람 생성자 실행\n");
+		printf("주민번호 : %s\n", regist_no);
+	}
+
+	char regist_no[30];
 };
 
 int main() { // 정적인 클래스보다 동적인 클래스에서 더 많이 사용한다.
 
-	Person* p = new Person();
+	Person* p = new Person("1234-9999");
 
 	p->printAnimalInfo();
 

@@ -24,7 +24,7 @@ public:
     void printInfo() {
         printf("사원번호 : %d\n", no);
         printf("사원명 : %s\n", name);
-        printf("성별 : %s\n", gender == 0 ? "남성" : "여성");
+        printf("성별 : %s\n", gender == 1 ? "남성" : "여성");
         printf("직급 : %s\n", rank);
     }
 };

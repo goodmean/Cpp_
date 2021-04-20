@@ -29,7 +29,7 @@ int main() {
         else if (input == 2) {
             //사원추가
             char* name = getString("사원명을 입력해주세요 :");
-            int gender = getInt("성별을 입력해주세요(0 남성 (1 여성 :");
+            int gender = getInt("성별을 입력해주세요(1 남성 (2 여성 :");
             char* rank = getString("직급을 입력해주세요 :");
 
             Employee* e = new Employee(name, gender, rank);

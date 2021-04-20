@@ -42,6 +42,23 @@ int main() {
         }
         else if (input == 3) {
             //사원 삭제
+            int number = getInt("사원번호를 입력해주세요");
+            int deletedIndex = -1;
+
+            for (int i = 0; i < count; i++) {
+                if (number == employee[i]->no) {
+                    delete employee[i];
+                    deletedIndex = i;
+                    break;
+                }
+            }
+            if (deletedIndex >= 0) { // 삭제가 되었다면
+                for (int i = deletedIndex; i < count - 1; i++) {
+                    employee[i] = employee[i + 1]; // 인덱스 한칸씩 떙겨오기
+                }
+            }
+            count--;
+            printf("삭제가 완료되었습니다.");
         }
         else if (input == 4) {
             //프로그램 종료

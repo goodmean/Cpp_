@@ -25,11 +25,15 @@ public:
 	Person(const char* regist_no) : Animal(2, "»ç¶÷"){
 		strcpy(this->regist_no, regist_no);
 	}
+	
+	void printInfo() {
+		printf("ÀÌ¸§: &s, ÁÖ¹Î¹øÈ£ : %s\n", name, regist_no);
+	}
 };
 
 int main() {
 	Person* p1 = new Person("1234-1234");
-	Animal* a1 = new Animal(2, "´ß");
+	Animal* a1 = p1;
 
 	p1->printInfo();
 	a1->printInfo();

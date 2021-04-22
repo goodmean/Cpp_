@@ -21,5 +21,11 @@
     <ClCompile Include="연산자overloading.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

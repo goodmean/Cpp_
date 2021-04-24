@@ -18,7 +18,7 @@ public:
 
 	void printInfo() {
 		printf("%s의 학생번호는 %d입니다. 성별은 %s입니다.\n",
-			name, student_no, gender == Gender::MALE? "남성" : "여성");
+			name, student_no, gender == Gender::MALE? "남성" : "여성"); // :: -> 범위 지정 연산자
 	}
 };
 

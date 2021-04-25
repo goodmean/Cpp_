@@ -1,6 +1,6 @@
 #include "Header.h"
 
-enum Gender {
+enum Gender { // enum : 열거형 키워드
 	MALE, FEMALE
 };
 

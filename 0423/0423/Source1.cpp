@@ -1,6 +1,6 @@
 #include "Header.h"
 
-enum Gender { // enum : 열거형 키워드
+enum Gender { // enum : 열거형 키워드 - 가독성을 위한 타입(Enumeratio)
 	MALE, FEMALE
 };
 

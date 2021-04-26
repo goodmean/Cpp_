@@ -5,3 +5,8 @@
 #include <cstring>
 #include <ctime>
 #include <cmath>
+
+#define GRID_WIDTH 7
+#define GRID_HEIGHT 10
+
+int displayData = [GRID_HEIGHT][GRID_WIDTH] = { 0, };

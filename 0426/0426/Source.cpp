@@ -1,49 +1,58 @@
 #include "Header.h"
 
-enum Month {
+//class Calender {
+//public:
+//	enum Month {
+//		JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
+//	};
+//};
+
+enum class Month {
 	JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
 };
 
 int main() {
+
 	Month m = Month::JAN;
+	int value = (int)m;
 
 	switch (m)
 	{
 	case Month::JAN:
-		print("1월");
+		printf("1월");
 		break;
 	case Month::FEB:
-		print("2월");
+		printf("2월");
 		break;
 	case Month::MAR:
-		print("3월");
+		printf("3월");
 		break;
 	case Month::APR:
-		print("4월");
+		printf("4월");
 		break;
 	case Month::MAY:
-		print("5월");
+		printf("5월");
 		break;
 	case Month::JUN:
-		print("6월");
+		printf("6월");
 		break;
 	case Month::JUL:
-		print("7월");
+		printf("7월");
 		break;
 	case Month::AUG:
-		print("8월");
+		printf("8월");
 		break;
 	case Month::SEP:
-		print("9월");
+		printf("9월");
 		break;
 	case Month::OCT:
-		print("10월");
+		printf("10월");
 		break;
 	case Month::NOV:
-		print("11월");
+		printf("11월");
 		break;
 	case Month::DEC:
-		print("12월");
+		printf("12월");
 		break;
 	default:
 		break;

@@ -21,7 +21,7 @@ int main() {
 		bool left = keyState('a');
 
 		if (left) {
-			// 왼쪽으로 블록 이동
+			// 왼쪽으로 블록 이동(a가 눌린상태일때 참으로 조건식 만족)
 
 		}
 		else {

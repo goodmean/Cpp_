@@ -8,6 +8,7 @@ int main() {
 
 	float prev = (float)clock() / CLOCKS_PER_SEC;
 	Display* display = new Display();
+	GameEngine* gameEngine = new GameEngine();
 	showConsoleCursor(false);
 
 	while (true) {
@@ -29,8 +30,10 @@ int main() {
 		else {
 			// 블록 계속 떨어지게
 		}
+		gameEngine->next(dt, 0);
 
 		// 화면 출력
+		gameEngine->makeDisplayData();
 		display->draw();
 
 		// 게임 상태 판별 

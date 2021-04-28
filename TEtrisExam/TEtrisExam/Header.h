@@ -43,7 +43,11 @@ public:
 class GameEngine {
 public:
 	int gameGridData[GRID_HEIGHT][GRID_WIDTH] = { 0, };
-	int userBlock[USERBLOCK_SIZE][USERBLOCK_SIZE] = { 0, };
+	int userBlock[USERBLOCK_SIZE][USERBLOCK_SIZE] = {
+		{1, 1, 1},
+		{0, 0, 1},
+		{0, 0, 1}
+	};
 	int blockX = 0;
 	int blockY = 0;
 
@@ -53,5 +57,29 @@ public:
 
 	void next(float dt, char keyboardInput) {
 		// 키보드 입력값을 받아와서 어떤 일을 할 지 결정(while 루프에서 매번 불려지는)
+		blockY++;
+	}
+
+	void makeDisplayData() { // 실제 게임 데이터를 화면에 출력할 수 있는 데이터로 바꿔준다.
+		for (int i = 0; i < GRID_HEIGHT; i++) {
+			for (int k = 0; k < GRID_WIDTH; k++) {
+				displayData[i][k] = gameGridData[i][k];
+			}
+
+		}
+
+		for (int i = 0; i < USERBLOCK_SIZE; i++) {
+			for (int k = 0; k < USERBLOCK_SIZE; k++) {
+				if (i + blockY < 0 || i + blockY > GRID_HEIGHT) {
+					// do nothing
+				}
+				else if (k + blockX < 0 || k + blockX > GRID_WIDTH) {
+					// do nothing
+				}
+				else {
+					displayData[i + blockY][k + blockX] = userBlock[i][k];
+				}
+			}
+		}
 	}
 };

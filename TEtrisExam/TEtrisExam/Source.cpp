@@ -7,6 +7,8 @@ int main() {
 	// clock_t : 현재 시간 체크
 
 	float prev = (float)clock() / CLOCKS_PER_SEC;
+	Display* display = new Display();
+	showConsoleCursor(false);
 
 	while (true) {
 		float curr = (float)clock() / CLOCKS_PER_SEC;
@@ -16,7 +18,7 @@ int main() {
 	
 		prev = curr;
 		
-		printf("%.3f\n", curr);
+		//printf("%.3f\n", curr);
 
 		bool left = keyState('a');
 
@@ -29,6 +31,8 @@ int main() {
 		}
 
 		// 화면 출력
+		display->draw();
+
 		// 게임 상태 판별 
 	}
 

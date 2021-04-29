@@ -57,12 +57,12 @@ public:
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0}
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 	};
 	int userBlock[USERBLOCK_SIZE][USERBLOCK_SIZE] = {
 		{0, 1, 1},
@@ -83,10 +83,59 @@ public:
 		//blockY++;
 		elapsed = elapsed + dt; // elapsed += dt;
 		if (elapsed >= 0.5f) {
-			blockY++;
+			if (canGoDown()) {
+				blockY++;
+			}
+			else { // 더 내려갈 수 없으면 userBlock을 gameGridData에 전사
+				trans();
+			}
+
 			elapsed = elapsed - 0.5f; // elapsed -= dt;
 		}
 	}
+
+	bool canGoDown() {
+		for (int i = 0; i < USERBLOCK_SIZE; i++) {
+			for (int k = 0; k < USERBLOCK_SIZE; k++) {
+				if (userBlock[i][k] == 1 && i + blockY + 1 >= GRID_HEIGHT)
+					return false;
+
+				if (userBlock[i][k] == 1 && gameGridData[i + blockY + 1][k + blockX] == 1)
+					return false;
+			}
+			
+		}
+		return true;
+	}
+
+	bool canGoLeft() {
+		return true;
+	}
+
+	bool canGoRight() {
+		return true;
+	}
+
+	void trans() {
+		for (int i = 0; i < USERBLOCK_SIZE; i++) {
+			for (int k = 0; k < USERBLOCK_SIZE; k++) {
+				gameGridData[i + blockY][k + blockX] = userBlock[i][k] == 1 ? userBlock[i][k] : gameGridData[i + blockY][k + blockX];
+			}
+		}
+
+		// TODO : 한줄이 가득 차 있는지 확인
+		// 
+		// 새로운 블록 생성
+		makeUserBlock();
+	}
+
+	void makeUserBlock() {
+		blockX = 0;
+		blockY = 0;
+
+		// TODO : 새로운 블록을 만든다
+	}
+
 
 	void makeDisplayData() { // 실제 게임 데이터를 화면에 출력할 수 있는 데이터로 바꿔준다.
 		for (int i = 0; i < GRID_HEIGHT; i++) {
@@ -114,4 +163,6 @@ public:
 			}
 		}
 	}
+
+
 };

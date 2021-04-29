@@ -42,7 +42,28 @@ public:
 
 class GameEngine {
 public:
-	int gameGridData[GRID_HEIGHT][GRID_WIDTH] = { 0, };
+	int gameGridData[GRID_HEIGHT][GRID_WIDTH] = { 
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0}
+	};
 	int userBlock[USERBLOCK_SIZE][USERBLOCK_SIZE] = {
 		{0, 1, 1},
 		{0, 0, 1},
@@ -84,7 +105,11 @@ public:
 					// do nothing
 				}
 				else {
-					displayData[i + blockY][k + blockX] = userBlock[i][k];
+					/*displayData[i + blockY][k + blockX] = userBlock[i][k] == 1 ? userBlock[i][k] : displayData[i + blockY][k + blockX];*/
+					int _x = k + blockX;
+					int _y = i + blockY;
+
+					displayData[_y][_x] = userBlock[i][k] | displayData[_y][_x];
 				}
 			}
 		}

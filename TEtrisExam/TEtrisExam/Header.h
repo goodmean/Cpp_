@@ -140,6 +140,7 @@ public:
 				}
 			}
 		}
+		return true;
 	}
 
 	void trans() {

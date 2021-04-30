@@ -22,13 +22,18 @@ int main() {
 		//printf("%.3f\n", curr);
 
 		bool left = keyState('a');
+		bool right = keyState('d');
 
 		if (left) {
 			// 왼쪽으로 블록 이동(a가 눌린상태일때 참으로 조건식 만족)
-
+			gameEngine->next(dt, 'a');
+		}
+		else if (right) {
+			gameEngine->next(dt, 'd');
 		}
 		else {
 			// 블록 계속 떨어지게
+
 		}
 		gameEngine->next(dt, 0);
 

@@ -92,6 +92,13 @@ public:
 
 			elapsed = elapsed - 0.5f; // elapsed -= dt;
 		}
+
+		if (keyboardInput == 'a') {
+			blockX--;
+		}
+		if (keyboardInput == 'd') {
+			blockX++;
+		}
 	}
 
 	bool canGoDown() {

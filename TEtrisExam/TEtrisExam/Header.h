@@ -57,7 +57,7 @@ public:
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -73,6 +73,7 @@ public:
 	int blockY = 0;
 
 	float elapsed = 0.0f;
+	float controlCheck = 0.0f;
 
 	void init() {
 		// 최초에 게임엔진을 초기화 하는 과정
@@ -93,11 +94,19 @@ public:
 			elapsed = elapsed - 0.5f; // elapsed -= dt;
 		}
 
-		if (keyboardInput == 'a' && canGoLeft()) {
+		controlCheck = controlCheck + dt;
+
+		if (keyboardInput == 'a' && canGoLeft() && controlCheck > 0.1) {
 			blockX--;
+			controlCheck = 0.0f;
 		}
-		if (keyboardInput == 'd' && canGoRight()) {
+		if (keyboardInput == 'd' && canGoRight() && controlCheck > 0.1) {
 			blockX++;
+			controlCheck = 0.0f;
+		}
+		if (keyboardInput == 's' && canGoDown() && controlCheck > 0.1) {
+			blockY++;
+			controlCheck = 0.0f;
 		}
 	}
 
@@ -143,6 +152,19 @@ public:
 		return true;
 	}
 
+	bool isLineFilled(int y) {
+		for (int i = 0; i < GRID_WIDTH; i++) {
+			if (gameGridData[y][i] == 0) return false;
+		}
+		return true;
+	}
+
+	bool eraseLine(int y) {
+		for (int i = 0; i < GRID_WIDTH; i++) {
+			gameGridData[y][i] = 0;
+		}
+	}
+
 	void trans() {
 		for (int i = 0; i < USERBLOCK_SIZE; i++) {
 			for (int k = 0; k < USERBLOCK_SIZE; k++) {
@@ -160,7 +182,7 @@ public:
 		blockX = 0;
 		blockY = 0;
 
-		// TODO : 새로운 블록을 만든다
+		// TODO : 랜덤으로 새로운 블록을 만든다
 	}
 
 

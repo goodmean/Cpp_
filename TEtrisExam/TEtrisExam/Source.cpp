@@ -23,6 +23,7 @@ int main() {
 
 		bool left = keyState('a');
 		bool right = keyState('d');
+		bool down = keyState('s');
 
 		if (left) {
 			// 왼쪽으로 블록 이동(a가 눌린상태일때 참으로 조건식 만족)
@@ -31,12 +32,14 @@ int main() {
 		else if (right) {
 			gameEngine->next(dt, 'd');
 		}
+		else if (down) {
+			gameEngine->next(dt, 's');
+		}
 		else {
 			// 블록 계속 떨어지게
-
+			gameEngine->next(dt, 0);
 		}
-		gameEngine->next(dt, 0);
-
+		
 		// 화면 출력
 		gameEngine->makeDisplayData();
 		display->draw();

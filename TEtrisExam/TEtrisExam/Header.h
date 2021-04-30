@@ -93,10 +93,10 @@ public:
 			elapsed = elapsed - 0.5f; // elapsed -= dt;
 		}
 
-		if (keyboardInput == 'a') {
+		if (keyboardInput == 'a' && canGoLeft()) {
 			blockX--;
 		}
-		if (keyboardInput == 'd') {
+		if (keyboardInput == 'd' && canGoRight()) {
 			blockX++;
 		}
 	}
@@ -116,11 +116,30 @@ public:
 	}
 
 	bool canGoLeft() {
+		for (int i = 0; i < USERBLOCK_SIZE; i++) {
+			for (int k = 0; k < USERBLOCK_SIZE; k++) {
+				if (userBlock[i][k] == 1 && k + blockX - 1 < 0) {
+					return false;
+				}
+				if (userBlock[i][k] == 1 && gameGridData[i + blockY][k + blockX - 1] == 1) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 
 	bool canGoRight() {
-		return true;
+		for (int i = 0; i < USERBLOCK_SIZE; i++) {
+			for (int k = 0; k < USERBLOCK_SIZE; k++) {
+				if (userBlock[i][k] == 1 && k + blockX + 1 > GRID_WIDTH - 1) {
+					return false;
+				}
+				if (userBlock[i][k] == 1 && gameGridData[i + blockY][k + blockX + 1]) {
+					return false;
+				}
+			}
+		}
 	}
 
 	void trans() {

@@ -62,14 +62,34 @@ public:
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+		{1, 1, 1, 1, 1, 1, 0, 1, 1, 0}
 	};
+
 	int userBlock[USERBLOCK_SIZE][USERBLOCK_SIZE] = {
-		{0, 1, 1},
+		{0, 0, 1},
 		{0, 0, 1},
 		{0, 0, 1}
 	};
-	int blockX = 0;
+
+	int userBlockVarious[3][USERBLOCK_SIZE][USERBLOCK_SIZE] = {
+		{
+			{0, 0, 1},
+			{0, 0, 1},
+			{0, 0, 1}
+		},
+		{
+			{0, 1, 1},
+			{0, 1, 1},
+			{0, 0, 0}
+		},
+		{
+			{0, 1, 0},
+			{1, 1, 0},
+			{0, 0, 0}
+		}
+	};
+
+	int blockX = GRID_WIDTH / 2 - USERBLOCK_SIZE / 2;
 	int blockY = 0;
 
 	float elapsed = 0.0f;
@@ -159,7 +179,7 @@ public:
 		return true;
 	}
 
-	bool eraseLine(int y) { // 한줄 지우기
+	void eraseLine(int y) { // 한줄 지우기
 		for (int i = 0; i < GRID_WIDTH; i++) {
 			gameGridData[y][i] = 0;
 		}
@@ -168,7 +188,7 @@ public:
 	void drop(int y) { // 지워서 생긴 라인 공백 떙겨오기
 		for (int i = y; i >= 0; i--) {
 			for (int k = 0; k < GRID_WIDTH; k++) {
-				gameGridData[i][k] = gameGridData[i - 1][k];
+				gameGridData[i][k] = i - 1 < 0 ? 0 : gameGridData[i - 1][k];
 			}
 		}
 	}
@@ -180,7 +200,6 @@ public:
 			}
 		}
 
-		// TODO : 한줄이 가득 차 있는지 확인하고 지움
 		for (int i = 0; i < GRID_HEIGHT; i++) {
 			if (isLineFilled(i)) {
 				eraseLine(i);
@@ -193,10 +212,19 @@ public:
 	}
 
 	void makeUserBlock() {
-		blockX = 0;
+		blockX = GRID_WIDTH / 2 - USERBLOCK_SIZE / 2;
 		blockY = 0;
 
 		// TODO : 랜덤으로 새로운 블록을 만든다
+		srand(time(0));
+
+		int various = rand() % 3;
+		for (int i = 0; i < USERBLOCK_SIZE; i++) {
+			for (int k = 0; k < USERBLOCK_SIZE; k++) {
+				userBlock[i][k] = userBlockVarious[various][i][k];
+			}
+		}
+
 	}
 
 

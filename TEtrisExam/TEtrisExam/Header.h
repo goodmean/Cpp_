@@ -110,7 +110,7 @@ public:
 		}
 	}
 
-	bool canGoDown() {
+	bool canGoDown() { // 아래로 갈 수 있니?
 		for (int i = 0; i < USERBLOCK_SIZE; i++) {
 			for (int k = 0; k < USERBLOCK_SIZE; k++) {
 				if (userBlock[i][k] == 1 && i + blockY + 1 >= GRID_HEIGHT)
@@ -124,7 +124,7 @@ public:
 		return true;
 	}
 
-	bool canGoLeft() {
+	bool canGoLeft() { // 왼쪽으로 갈 수 있니?
 		for (int i = 0; i < USERBLOCK_SIZE; i++) {
 			for (int k = 0; k < USERBLOCK_SIZE; k++) {
 				if (userBlock[i][k] == 1 && k + blockX - 1 < 0) {
@@ -138,7 +138,7 @@ public:
 		return true;
 	}
 
-	bool canGoRight() {
+	bool canGoRight() { // 오른쪽으로 갈 수 있니?
 		for (int i = 0; i < USERBLOCK_SIZE; i++) {
 			for (int k = 0; k < USERBLOCK_SIZE; k++) {
 				if (userBlock[i][k] == 1 && k + blockX + 1 > GRID_WIDTH - 1) {
@@ -152,16 +152,24 @@ public:
 		return true;
 	}
 
-	bool isLineFilled(int y) {
+	bool isLineFilled(int y) { // 한줄이 가득 차 있는지 확인
 		for (int i = 0; i < GRID_WIDTH; i++) {
 			if (gameGridData[y][i] == 0) return false;
 		}
 		return true;
 	}
 
-	bool eraseLine(int y) {
+	bool eraseLine(int y) { // 한줄 지우기
 		for (int i = 0; i < GRID_WIDTH; i++) {
 			gameGridData[y][i] = 0;
+		}
+	}
+
+	void drop(int y) { // 지워서 생긴 라인 공백 떙겨오기
+		for (int i = y; i >= 0; i--) {
+			for (int k = 0; k < GRID_WIDTH; k++) {
+				gameGridData[i][k] = gameGridData[i - 1][k];
+			}
 		}
 	}
 
@@ -172,8 +180,14 @@ public:
 			}
 		}
 
-		// TODO : 한줄이 가득 차 있는지 확인
-		// 
+		// TODO : 한줄이 가득 차 있는지 확인하고 지움
+		for (int i = 0; i < GRID_HEIGHT; i++) {
+			if (isLineFilled(i)) {
+				eraseLine(i);
+				drop(i);
+			}
+		}
+
 		// 새로운 블록 생성
 		makeUserBlock();
 	}

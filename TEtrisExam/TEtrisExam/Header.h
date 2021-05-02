@@ -132,7 +132,7 @@ public:
 
 	bool canGoDown() { // 아래로 갈 수 있니?
 		for (int i = 0; i < USERBLOCK_SIZE; i++) {
-			for (int k = 0; k < USERBLOCK_SIZE; k++) {
+			for (int k = 0; k < USERBLOCK_SIZE; k++) { // 그리드 밖을 넘었니?
 				if (userBlock[i][k] == 1 && i + blockY + 1 >= GRID_HEIGHT)
 					return false;
 

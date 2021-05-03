@@ -42,7 +42,13 @@ public:
 
 class GameEngine {
 public:
-	int gameGridData[GRID_HEIGHT][GRID_WIDTH] = { 
+	enum class GameState {
+		PLAYING, GAMEOVER
+	};
+
+	GameState state = GameState::PLAYING;
+
+	int gameGridData[GRID_HEIGHT][GRID_WIDTH] = {
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -65,11 +71,7 @@ public:
 		{1, 1, 1, 1, 0, 1, 0, 1, 1, 0}
 	};
 
-	int userBlock[USERBLOCK_SIZE][USERBLOCK_SIZE] = {
-		{0, 0, 1},
-		{0, 0, 1},
-		{0, 0, 1}
-	};
+	int userBlock[USERBLOCK_SIZE][USERBLOCK_SIZE] = { 0, };
 
 	int userBlockVarious[3][USERBLOCK_SIZE][USERBLOCK_SIZE] = {
 		{
@@ -97,11 +99,14 @@ public:
 
 	void init() {
 		// 최초에 게임엔진을 초기화 하는 과정
+		makeUserBlock();
 	}
 
 	void next(float dt, char keyboardInput) {
 		// 키보드 입력값을 받아와서 어떤 일을 할 지 결정(while 루프에서 매번 불려지는)
 		//blockY++;
+
+		if (state == GameState::GAMEOVER) return;
 		elapsed = elapsed + dt; // elapsed += dt;
 		if (elapsed >= 0.5f) {
 			if (canGoDown()) {
@@ -109,6 +114,7 @@ public:
 			}
 			else { // 더 내려갈 수 없으면 userBlock을 gameGridData에 전사
 				trans();
+				if (gameOverDecision()) state = GameState::GAMEOVER;
 			}
 
 			elapsed = elapsed - 0.5f; // elapsed -= dt;
@@ -139,7 +145,7 @@ public:
 				if (userBlock[i][k] == 1 && gameGridData[i + blockY + 1][k + blockX] == 1)
 					return false;
 			}
-			
+
 		}
 		return true;
 	}
@@ -211,12 +217,20 @@ public:
 		makeUserBlock();
 	}
 
+	bool gameOverDecision() {
+		for (int i = 0; i < USERBLOCK_SIZE; i++) {
+			for (int k = 0; k < USERBLOCK_SIZE; k++) {
+				if (userBlock[i][k] == 1 && gameGridData[i + blockY][k + blockX] == 1) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	void makeUserBlock() {
 		blockX = GRID_WIDTH / 2 - USERBLOCK_SIZE / 2;
 		blockY = 0;
-
-		// TODO : 랜덤으로 새로운 블록을 만든다
-		srand(time(0));
 
 		int various = rand() % 3;
 		for (int i = 0; i < USERBLOCK_SIZE; i++) {
@@ -227,6 +241,9 @@ public:
 
 	}
 
+	void rotate(float dt, char keyboardInput) {
+		//TODO : 회전 구현하기
+	}
 
 	void makeDisplayData() { // 실제 게임 데이터를 화면에 출력할 수 있는 데이터로 바꿔준다.
 		for (int i = 0; i < GRID_HEIGHT; i++) {

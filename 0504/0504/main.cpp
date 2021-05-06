@@ -2,6 +2,9 @@
 #include "Animal.h"
 #include "Person.h"
 
+// 클래스의 선언과 파일의 ㅇ름은 같지 않아도 된다.
+// 여러개의 헤더파일에 중복적용이 되어있어도 상관이 없다.
+
 int main() { // c++ 프로그램은 무조건 cpp파일을 기준으로 만들어진다.
 
 	Animal* animal = new Animal(2, "닭");

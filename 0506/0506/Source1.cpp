@@ -40,8 +40,6 @@ public:
 		default:
 			break;
 		}
-
-		return 2;
 	}
 	void setTime(Time t) {
 		this->time = t;

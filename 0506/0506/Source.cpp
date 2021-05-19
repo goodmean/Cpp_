@@ -1,8 +1,8 @@
-//비트와이즈      //순수가상함수
-//기계의 근본연산
-//Bitwise or   |
-//Bitwise and   &
-//Shift         <<, >>
+// 비트와이즈	// 순수 가상함수
+// 기계의 근본 연산
+// Bitwise or
+// Bitwise and
+// Shift <<,>>
 
 #include <cstdio>
 

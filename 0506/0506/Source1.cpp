@@ -6,7 +6,7 @@
 #include <cstring>
 
 enum class Time {
-	Morning, Afternoon, Night // enum
+	Morning, Afternoon, Night // enum 검색해보기
 };
 
 class Animal {
